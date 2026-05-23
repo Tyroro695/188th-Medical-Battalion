@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>188th Medical Battalion - Field Manual</title>
+    <style>
+        /* Importation des polices machine à écrire de Google */
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap');
+
+        /* Le fond du site : effet table en bois sombre / cuir */
+        body {
+            background-color: #1e1a15;
+            background-image: radial-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Menu de navigation (Les catégories) style intercalaires militaires */
+        nav {
+            display: flex;
+            gap: 10px;
+            max-width: 850px;
+            width: 100%;
+            margin-bottom: -5px; /* Pour imbriquer le menu dans le livre */
+            z-index: 2;
+        }
+
+        nav button {
+            background-color: #3b4416; /* Vert armée */
+            color: #d1c2a5;
+            border: 2px solid #282e0f;
+            border-bottom: none;
+            padding: 12px 20px;
+            font-family: 'Special Elite', monospace;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        nav button:hover, nav button.active {
+            background-color: #ddc9a3; /* Devient la couleur du papier */
+            color: #2b2b2b;
+            font-weight: bold;
+            padding-bottom: 17px;
+            margin-top: -5px;
+        }
+
+        /* La page du manuel */
+        .classeur {
+            background-color: #ddc9a3; /* Couleur vieux papier jauni */
+            max-width: 850px;
+            width: 100%;
+            min-height: 900px;
+            padding: 60px 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            border-left: 20px solid #b3a07d; /* Effet reliure */
+            border-radius: 4px;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Effet de salissures, brûlures et taches de sang en fond */
+        .classeur::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 25%, rgba(112, 83, 53, 0.15) 0%, transparent 35%), /* Café */
+                radial-gradient(circle at 80% 70%, rgba(122, 28, 28, 0.08) 0%, transparent 20%),  /* Sang séché */
+                radial-gradient(circle at 50% 50%, rgba(0,0,0,0.03) 0%, transparent 80%);
+            pointer-events: none;
+            border-radius: 4px;
+        }
+
+        /* En-tête militaire */
+        .en-tete {
+            text-align: center;
+            border-bottom: 3px double #4B5320;
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+        }
+
+        .tampon {
+            font-family: 'Special Elite', monospace;
+            color: #7A1C1C;
+            font-size: 22px;
+            letter-spacing: 6px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-family: 'Special Elite', monospace;
+            color: #3b4416;
+            font-size: 32px;
+            margin: 5px 0;
+        }
+
+        .sous-titre {
+            font-family: 'Courier Prime', monospace;
+            font-size: 13px;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        /* Contenu textuel */
+        h2 {
+            font-family: 'Special Elite', monospace;
+            color: #3b4416;
+            font-size: 22px;
+            margin-top: 35px;
+            border-bottom: 1px solid #4b5320;
+            padding-bottom: 5px;
+        }
+
+        p, li {
+            font-family: 'Courier Prime', monospace;
+            font-size: 16px;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        /* Gestion de l'affichage des catégories */
+        .categorie-content {
+            display: none;
+        }
+
+        .categorie-content.active {
+            display: block;
+            animation: tournerPage 0.3s ease-in-out;
+        }
+
+        @keyframes tournerPage {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .pied-page {
+            position: absolute;
+            bottom: 30px;
+            left: 50px;
+            right: 50px;
+            border-top: 1px dashed #8c826e;
+            padding-top: 15px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 11px;
+            color: #554d3f;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRE DE NAVIGATION (TES CATÉGORIES) -->
+    <nav>
+        <button class="active" onclick="ouvrirCategorie('accueil')">Accueil</button>
+        <button onclick="ouvrirCategorie('grades')">Grades & Organisation</button>
+        <button onclick="ouvrirCategorie('soins')">Protocoles de Soins</button>
+        <button onclick="ouvrirCategorie('codex')">Codex Médical</button>
+    </nav>
+
+    <!-- LE MANUEL -->
+    <div class="classeur">
+        
+        <div class="en-tete">
+            <div class="tampon">R-E-S-T-R-I-C-T-E-D</div>
+            <h1>188th MEDICAL BATTALION</h1>
+            <div class="sous-titre">WAR DEPARTMENT — MEDICAL FIELD MANUAL — PROPERTY OF LBRP WW2</div>
+        </div>
+
+        <!-- CONTENU : ACCUEIL -->
+        <div id="accueil" class="categorie-content active">
+            <h2>MANUEL DE CAMPAGNE OFFICIEL</h2>
+            <p><strong>1. OBJET DU DOCUMENT :</strong> Ce manuel rassemble l'ensemble des directives, règles et connaissances médicales requises pour servir au sein du 188th Medical Battalion sur le théâtre d'opérations européen.</p>
+            <p>Tout personnel médical est tenu de connaître et d'appliquer ces procédures sous peine de sanctions disciplinaires ou de passage devant la Cour Martiale.</p>
+            <p><em>Utilise les onglets cartonnés ci-dessus pour naviguer dans les différentes archives du bataillon.</em></p>
+        </div>
+
+        <!-- CONTENU : GRADES -->
+        <div id="grades" class="categorie-content">
+            <h2>SECTION I - CHAÎNE DE COMMANDEMENT</h2>
+            <p><strong>2. GRADES ET PRÉGÉRATIVES :</strong> Voici la hiérarchie du personnel médical sur le terrain :</p>
+            <ul>
+                <li><strong>Medical Captain :</strong> Commandant de la faction médicale. Responsable des décisions majeures au QG.</li>
+                <li><strong>Medical Lieutenant :</strong> Officier de terrain, gère le déploiement des tentes chirurgicales.</li>
+                <li><strong>Medical Sergeant :</strong> Encadre les infirmiers de combat lors des assauts.</li>
+                <li><strong>Combat Medic :</strong> Corps de base. Assure la stabilisation des blessés sous le feu ennemi.</li>
+            </ul>
+        </div>
+
+        <!-- CONTENU : SOINS -->
+        <div id="soins" class="categorie-content">
+            <h2>SECTION II - PROTOCOLES D'URGENCES EN COMBAT</h2>
+            <p><strong>3. CHAÎNE DE SURVIE (RP SÉRIEUX) :</strong> Face à un soldat blessé, appliquez strictement la procédure "M.A.R.C.H" :</p>
+            <p><strong>A. Massive Bleeding :</strong> Posez immédiatement un garrot sur les membres qui saignent abondamment.</p>
+            <p><strong>B. Airway :</strong> Vérifiez les voies respiratoires du soldat. Si inconscient, basculez sa tête en arrière.</p>
+            <p><strong>C. Respiration :</strong> Traitez les plaies au torse avec un pansement thoracique étanche.</p>
+        </div>
+
+        <!-- CONTENU : CODEX -->
+        <div id="codex" class="categorie-content">
+            <h2>SECTION III - UTILISATION DES DOTATIONS MÉDICALES</h2>
+            <p><strong>4. PHARMACOPÉE DE CAMPAGNE :</strong> Règles d'utilisation du matériel du serveur :</p>
+            <p>• <strong>Syrette de Morphine :</strong> Maximum 2 injections par soldat. Interdit en cas de traumatisme crânien (risque de coma RP).</p>
+            <p>• <strong>Sulfamide en poudre :</strong> À saupoudrer directement dans les plaies ouvertes pour éviter l'infection avant de bander.</p>
+            <p>• <strong>Plasma Sanguin :</strong> À perfuser uniquement si le patient a perdu une quantité critique de sang.</p>
+        </div>
+
+        <!-- PIED DE PAGE STRICT -->
+        <div class="pied-page">
+            RESTRICTED — FOR OFFICIAL USE ONLY — WAR DEPARTMENT — BASE CODE: LBRP-1944-MED
+        </div>
+
+    </div>
+
+    <!-- SCRIPT POUR CHANGER DE PAGE EN CLIQUANT SUR LES ONGLETS -->
+    <script>
+        function ouvrirCategorie(idCategorie) {
+            // Désactiver tous les contenus
+            let contenus = document.querySelectorAll('.categorie-content');
+            contenus.forEach(c => c.classList.remove('active'));
+
+            // Désactiver tous les boutons du menu
+            let boutons = document.querySelectorAll('nav button');
+            boutons.forEach(b => b.classList.remove('active'));
+
+            // Activer le contenu et le bouton cliqué
+            document.getElementById(idCategorie).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
