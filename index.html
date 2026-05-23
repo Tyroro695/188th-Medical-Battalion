@@ -11,111 +11,158 @@
             background-color: #1e1a15;
             background-image: radial-gradient(rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
             margin: 0;
-            padding: 40px 20px;
+            padding: 30px;
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            align-items: flex-start;
             min-height: 100vh;
-        }
-
-        /* Menu principal adaptatif */
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            max-width: 950px;
-            width: 100%;
-            margin-bottom: -5px;
-            z-index: 2;
-        }
-
-        nav button {
-            background-color: #3b4416; /* Vert armée */
-            color: #d1c2a5;
-            border: 2px solid #282e0f;
-            border-bottom: none;
-            padding: 10px 15px;
-            font-family: 'Special Elite', monospace;
-            font-size: 13px;
-            cursor: pointer;
-            border-radius: 5px 5px 0 0;
-            transition: all 0.2s;
-        }
-
-        nav button:hover, nav button.active {
-            background-color: #ddc9a3; /* Couleur papier */
-            color: #2b2b2b;
-            font-weight: bold;
-            padding-bottom: 15px;
-        }
-
-        .classeur {
-            background-color: #ddc9a3;
-            max-width: 950px;
-            width: 100%;
-            min-height: 1000px;
-            padding: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-            border-left: 20px solid #b3a07d;
-            border-radius: 4px;
-            position: relative;
             box-sizing: border-box;
         }
 
-        .classeur::before {
+        /* Structure Classeur Ouvert (Gauche: Sommaire / Droite: Contenu) */
+        .classeur-container {
+            display: flex;
+            max-width: 1200px;
+            width: 100%;
+            background-color: #ddc9a3; /* Couleur vieux papier */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+            border-left: 25px solid #b3a07d; /* Reliure militaire */
+            border-radius: 5px;
+            min-height: 850px;
+            position: relative;
+        }
+
+        .classeur-container::before {
             content: "";
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             background: 
-                radial-gradient(circle at 15% 25%, rgba(112, 83, 53, 0.15) 0%, transparent 35%),
-                radial-gradient(circle at 80% 70%, rgba(122, 28, 28, 0.08) 0%, transparent 20%);
+                radial-gradient(circle at 30% 20%, rgba(112, 83, 53, 0.12) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(122, 28, 28, 0.06) 0%, transparent 25%);
             pointer-events: none;
+        }
+
+        /* --- COLONNE GAUCHE : LE SOMMAIRE INTERACTIF --- */
+        .sommaire {
+            width: 320px;
+            border-right: 2px dashed #a49475;
+            padding: 30px 20px;
+            box-sizing: border-box;
+            background-color: rgba(0, 0, 0, 0.03);
+            z-index: 1;
+        }
+
+        .sommaire-titre {
+            font-family: 'Special Elite', monospace;
+            font-size: 18px;
+            color: #3b4416;
+            text-align: center;
+            border-bottom: 2px solid #3b4416;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Boutons Principaux */
+        .cat-principale {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'Special Elite', monospace;
+            font-size: 14px;
+            color: #2b2b2b;
+            padding: 10px 5px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cat-principale:hover {
+            background-color: rgba(59, 68, 22, 0.1);
+        }
+
+        /* Conteneur des sous-catégories (caché de base) */
+        .sous-menu {
+            display: none;
+            padding-left: 15px;
+            margin-bottom: 10px;
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        /* Liens des Sous-catégories */
+        .sous-cat {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-family: 'Courier Prime', monospace;
+            font-size: 13px;
+            color: #444;
+            padding: 6px 5px;
+            cursor: pointer;
+            display: block;
+        }
+
+        .sous-cat:hover, .sous-cat.active-page {
+            color: #7A1C1C;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        /* --- COLONNE DROITE : LA PAGE DE LECTURE --- */
+        .page-contenu {
+            flex: 1;
+            padding: 40px 50px;
+            box-sizing: border-box;
+            z-index: 1;
         }
 
         .en-tete {
             text-align: center;
             border-bottom: 3px double #4B5320;
-            padding-bottom: 20px;
+            padding-bottom: 15px;
             margin-bottom: 30px;
         }
 
         .tampon {
             font-family: 'Special Elite', monospace;
             color: #7A1C1C;
-            font-size: 22px;
-            letter-spacing: 6px;
+            font-size: 20px;
+            letter-spacing: 5px;
             font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 5px;
         }
 
         h1 {
             font-family: 'Special Elite', monospace;
             color: #3b4416;
-            font-size: 30px;
+            font-size: 26px;
             margin: 5px 0;
         }
 
         .sous-titre {
             font-family: 'Courier Prime', monospace;
-            font-size: 13px;
-            color: #444;
+            font-size: 12px;
+            color: #555;
+        }
+
+        /* Textes de la page */
+        .fiche-texte {
+            display: none;
+        }
+
+        .fiche-texte.active-content {
+            display: block;
         }
 
         h2 {
             font-family: 'Special Elite', monospace;
             color: #3b4416;
             font-size: 22px;
-            margin-top: 30px;
             border-bottom: 1px solid #4b5320;
             padding-bottom: 5px;
-        }
-
-        h3 {
-            font-family: 'Special Elite', monospace;
-            color: #7A1C1C;
-            font-size: 18px;
-            margin-top: 25px;
+            margin-top: 0;
         }
 
         p, li {
@@ -125,170 +172,270 @@
             line-height: 1.6;
         }
 
-        .categorie-content {
-            display: none;
-        }
-
-        .categorie-content.active {
-            display: block;
-        }
-
         .pied-page {
-            margin-top: 50px;
-            border-top: 1px dashed #8c826e;
-            padding-top: 15px;
+            position: absolute;
+            bottom: 20px;
+            right: 50px;
             font-family: 'Courier Prime', monospace;
             font-size: 11px;
-            color: #554d3f;
-            text-align: center;
+            color: #666;
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATEUR DES GRANDES CATÉGORIES -->
-    <nav>
-        <button class="active" onclick="ouvrirCategorie('accueil')">🏠 Accueil</button>
-        <button onclick="ouvrirCategorie('reglement')">📕 Règlement</button>
-        <button onclick="ouvrirCategorie('protocoles')">📃 Protocoles de soin</button>
-        <button onclick="ouvrirCategorie('aide-soins')">🩺 Aide aux soins</button>
-        <button onclick="ouvrirCategorie('equipements')">🛠️ Équipements & Tenues</button>
-        <button onclick="ouvrirCategorie('autres')">📋 Autres Directives</button>
-    </nav>
-
-    <div class="classeur">
+    <div class="classeur-container">
         
-        <div class="en-tete">
-            <div class="tampon">R-E-S-T-R-I-C-T-E-D</div>
-            <h1>188th MEDICAL BATTALION</h1>
-            <div class="sous-titre">WAR DEPARTMENT — MEDICAL FIELD MANUAL — PROPERTY OF LBRP</div>
+        <!-- ================= COLONNE GAUCHE : SOMMAIRE ================= -->
+        <div class="sommaire">
+            <div class="sommaire-titre">INDEX GENERAL</div>
+            
+            <!-- ACCUEIL -->
+            <button class="cat-principale" onclick="ouvrirDirect('page-accueil')">🏠 Accueil</button>
+
+            <!-- REGLEMENT -->
+            <button class="cat-principale" onclick="toggleMenu('menu-reglement')">📕 Règlement <span>▼</span></button>
+            <div id="menu-reglement" class="sous-menu">
+                <button class="sous-cat" onclick="changerPage('page-deontologie')">📜 Code de déontologie</button>
+                <button class="sous-cat" onclick="changerPage('page-hippocrate')">🕯️ Serment d'Hippocrate</button>
+            </div>
+
+            <!-- PROTOCOLES -->
+            <button class="cat-principale" onclick="toggleMenu('menu-protocoles')">📃 Protocoles de soin <span>▼</span></button>
+            <div id="menu-protocoles" class="sous-menu">
+                <button class="sous-cat" onclick="changerPage('page-premiers-soins')">🩹 Premiers soins</button>
+                <button class="sous-cat" onclick="changerPage('page-stabilisations')">🔹 Stabilisations</button>
+                <button class="sous-cat" onclick="changerPage('page-guide-secourisme')">🔹 Guide du secourisme</button>
+                <button class="sous-cat" onclick="changerPage('page-blessures-moyennes')">🩸 Blessures / Soins moyens</button>
+                <button class="sous-cat" onclick="changerPage('page-operation')">💉 Opération</button>
+                <button class="sous-cat" onclick="changerPage('page-info-op')">🔹 Infos médicales Opération</button>
+                <button class="sous-cat" onclick="changerPage('page-guide-mat-op')">🔹 Guide matériel Opérations</button>
+            </div>
+
+            <!-- AIDE AUX SOINS -->
+            <button class="cat-principale" onclick="toggleMenu('menu-aide')">🩺 Aide aux soins <span>▼</span></button>
+            <div id="menu-aide" class="sous-menu">
+                <button class="sous-cat" onclick="changerPage('page-info-obligatoire')">🔹 Informations obligatoires</button>
+                <button class="sous-cat" onclick="changerPage('page-anatomie')">🔹 Principes anatomiques</button>
+                <button class="sous-cat" onclick="changerPage('page-medicaments')">🔹 Les Médicaments</button>
+                <button class="sous-cat" onclick="changerPage('page-dosages')">🔹 Dosage Médicaments</button>
+                <button class="sous-cat" onclick="changerPage('page-info-meds')">🔹 Info des médicaments</button>
+                <button class="sous-cat" onclick="changerPage('page-traitements')">🔹 Traitements et maladies</button>
+            </div>
+
+            <!-- EQUIPEMENTS -->
+            <button class="cat-principale" onclick="toggleMenu('menu-equipements')">🛠️ Équipements <span>▼</span></button>
+            <div id="menu-equipements" class="sous-menu">
+                <button class="sous-cat" onclick="changerPage('page-eq-secours')">🩹 Premier secours</button>
+                <button class="sous-cat" onclick="changerPage('page-eq-op')">💉 Opération</button>
+                <button class="sous-cat" onclick="changerPage('page-tenues-hdr')">⛑️ Tenue: Homme du rang</button>
+                <button class="sous-cat" onclick="changerPage('page-tenues-so')">⛑️ Tenue: Sous-Officier</button>
+                <button class="sous-cat" onclick="changerPage('page-tenues-off')">⛑️ Tenue: Officier</button>
+            </div>
+
+            <!-- COMMUNICATION -->
+            <button class="cat-principale" onclick="toggleMenu('menu-com')">📻 Communication <span>▼</span></button>
+            <div id="menu-com" class="sous-menu">
+                <button class="sous-cat" onclick="changerPage('page-recensement')">🔹 Recensement de blessés</button>
+            </div>
+
+            <!-- VACCINATION -->
+            <button class="cat-principale" onclick="toggleMenu('menu-vaccin')">💉 Campagne Vaccin <span>▼</span></button>
+            <div id="menu-vaccin" class="sous-menu">
+                <button class="sous-cat" onclick="changerPage('page-tetanos')">🔹 Vaccin du Tétanos</button>
+                <button class="sous-cat" onclick="changerPage('page-ancienne-campagne')">🔹 Ancienne Campagne</button>
+                <button class="sous-cat" onclick="changerPage('page-manuel-vaccin')">🔹 Manuel des Vaccinations</button>
+            </div>
+
+            <!-- CATEGORIES SEULES -->
+            <button class="cat-principale" onclick="ouvrirDirect('page-fonction')">⚙️ Fonction</button>
+            <button class="cat-principale" onclick="ouvrirDirect('page-installations')">🏥 Installations Médicales</button>
+            <button class="cat-principale" onclick="ouvrirDirect('page-geneve')">🛡️ Convention de Genève</button>
+            <button class="cat-principale" onclick="ouvrirDirect('page-formation')">📚 Formation</button>
+
         </div>
 
-        <!-- 🏠 ACCUEIL -->
-        <div id="accueil" class="categorie-content active">
-            <h2>🏠 MANUEL DE CAMPAGNE OFFICIEL</h2>
-            <p><strong>BIENVENUE SOLDAT.</strong> Ce registre officiel contient l'ensemble des règles, des connaissances anatomiques et des protocoles chirurgicaux indispensables pour le service médical.</p>
-            <p>Clique sur les onglets cartonnés tout en haut de la page pour naviguer dans les archives du bataillon et modifier tes sections.</p>
+        <!-- ================= COLONNE DROITE : CONTENU ================= -->
+        <div class="page-contenu">
             
-            <h3>⚙️ FONCTIONNEMENT GÉNÉRAL</h3>
-            <p>[Écris ici le résumé global du fonctionnement de la faction médicale sur le serveur].</p>
-            
-            <h3>🏥 INSTALLATIONS MÉDICALES</h3>
-            <p>[Décris ici les infrastructures disponibles : l'hôpital de campagne, les tentes de réanimation, les postes avancés...].</p>
+            <div class="en-tete">
+                <div class="tampon">RESTRICTED</div>
+                <h1>188th MEDICAL BATTALION</h1>
+                <div class="sous-titre">WAR DEPARTMENT — FIELD MANUAL — LBRP WW2</div>
+            </div>
 
-            <h3>🛡️ CONVENTION DE GENÈVE</h3>
-            <p>[Rappelle ici les règles de la convention de Genève appliquées sur le serveur : protection des blessés, interdiction de tirer sur les médecins arborant la croix rouge, etc.].</p>
+            <!-- FICHES DE TEXTE (Une par sous-catégorie) -->
+            
+            <div id="page-accueil" class="fiche-texte active-content">
+                <h2>BASE MILITAIRE - ACCUEIL</h2>
+                <p>Bienvenue dans le manuel de campagne officiel du 188th Medical Battalion.</p>
+                <p>Utilise le sommaire à gauche pour parcourir les différentes sections et protocoles obligatoires du serveur.</p>
+            </div>
 
-            <h3>📚 FORMATIONS</h3>
-            <p>[Ajoute ici les informations sur le passage des brevets médicaux ou les sessions de formation pour les recrues].</p>
-        </div>
+            <!-- REGLEMENT -->
+            <div id="page-deontologie" class="fiche-texte">
+                <h2>📜 CODE DE DÉONTOLOGIE</h2>
+                <p>[Rédige ici ton code de déontologie médicale...]</p>
+            </div>
+            <div id="page-hippocrate" class="fiche-texte">
+                <h2>🕯️ SERMENT D'HIPPOCRATE</h2>
+                <p>[Insère ici le serment d'Hippocrate ou la version adaptée au Serious RP...]</p>
+            </div>
 
-        <!-- 📕 REGLEMENT -->
-        <div id="reglement" class="categorie-content">
-            <h2>📕 SECTION I - CADRE JURIDIQUE ET DÉONTOLOGIE</h2>
-            
-            <h3>📜 CODE DE DÉONTOLOGIE</h3>
-            <p>[Insère ici les devoirs fondamentaux du médecin de l'armée : neutralité des soins, respect des supérieurs, comportement sous le feu...].</p>
-            
-            <h3>🕯️ SERMENT D'HIPPOCRATE</h3>
-            <p><em>« Au moment d'être admis à exercer la médecine, je promets et je jure d'être fidèle aux lois de l'honneur et de la probité... »</em></p>
-            <p>[Complète ici le texte complet ou la version adaptée au serveur de ton Serment].</p>
-        </div>
+            <!-- PROTOCOLES DE SOINS -->
+            <div id="page-premiers-soins" class="fiche-texte">
+                <h2>🩹 PREMIERS SOINS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-stabilisations" class="fiche-texte">
+                <h2>🔹 STABILISATIONS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-guide-secourisme" class="fiche-texte">
+                <h2>🔹 GUIDE DU SECOURISME ET DU MÉDECIN</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-blessures-moyennes" class="fiche-texte">
+                <h2>🩸 BLESSURES / SOINS MOYENS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-operation" class="fiche-texte">
+                <h2>💉 OPÉRATION CHIRURGICALE</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-info-op" class="fiche-texte">
+                <h2>🔹 INFORMATIONS MÉDICALES D'UNE OPÉRATION</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-guide-mat-op" class="fiche-texte">
+                <h2>🔹 GUIDE MATÉRIEL OPÉRATIONS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
 
-        <!-- 📃 PROTOCOLES DE SOIN -->
-        <div id="protocoles" class="categorie-content">
-            <h2>📃 SECTION II - PROTOCOLES OPÉRATIONNELS DE SOIN</h2>
-            
-            <h3>🩹 PREMIERS SOINS</h3>
-            <p>[Explications sur la prise en charge rapide sur le terrain : pose de bandage, utilisation de la trousse de secours individuelle...].</p>
-            
-            <h3>STABILISATIONS</h3>
-            <p>[Comment maintenir un blessé critique en vie en attendant son évacuation vers l'arrière].</p>
-            
-            <h3>GUIDE DU SECOURISME ET DU MÉDECIN</h3>
-            <p>[Guide général étape par étape pour le diagnostic d'un soldat à terre].</p>
-            
-            <h3>🩸 BLESSURES & SOINS MOYENS</h3>
-            <p>[Gestion des cas intermédiaires : éclats de shrapnel légers, fractures simples, brûlures].</p>
-            
-            <h3>💉 OPÉRATIONS CHIRURGICALES</h3>
-            <p>[Procédure complète pour ouvrir, extraire une balle et recoudre au bloc opératoire].</p>
-            
-            <h3>INFORMATIONS MÉDICALES D'UNE OPÉRATION</h3>
-            <p>[Règles RP à savoir : temps minimum de l'opération, risques de complications].</p>
-            
-            <h3>GUIDE MATÉRIEL OPÉRATIONS</h3>
-            <p>[Liste et description des outils chirurgicaux : scalpel, écarteur, pinces hémostatiques...].</p>
-        </div>
+            <!-- AIDE AUX SOINS -->
+            <div id="page-info-obligatoire" class="fiche-texte">
+                <h2>🔹 INFORMATIONS OBLIGATOIRES À LIRE ET SAVOIR</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-anatomie" class="fiche-texte">
+                <h2>🔹 LES PRINCIPES ANATOMIQUES</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-medicaments" class="fiche-texte">
+                <h2>🔹 LES MÉDICAMENTS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-dosages" class="fiche-texte">
+                <h2>🔹 DOSAGE MÉDICAMENTS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-info-meds" class="fiche-texte">
+                <h2>🔹 INFO DES MÉDICAMENTS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-traitements" class="fiche-texte">
+                <h2>🔹 TRAITEMENTS ET MALADIES</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
 
-        <!-- 🩺 AIDE AU SOINS -->
-        <div id="aide-soins" class="categorie-content">
-            <h2>🩺 SECTION III - ENCYCLOPÉDIE ET COMPRENDRE LES SOINS</h2>
-            
-            <h3>INFORMATIONS OBLIGATOIRES À LIRE ET SAVOIR</h3>
-            <p><strong>ATTENTION :</strong> Tout manquement à cette section sera lourdement sanctionné d'un avertissement ou d'une radiation.</p>
-            
-            <h3>LES PRINCIPES ANATOMIQUES</h3>
-            <p>[Notions basiques de biologie pour le Serious RP : système sanguin, organes vitaux, traumatismes crâniens].</p>
-            
-            <h3>💊 LES MÉDICAMENTS & DOSAGES</h3>
-            <p>[Indique ici les doses maximales pour ne pas tuer le patient par overdose (ex: Morphine : x2 max)].</p>
-            
-            <h3>INFO DES MÉDICAMENTS</h3>
-            <p>[Effets secondaires, contre-indications de chaque substance du serveur].</p>
-            
-            <h3>TRAITEMENTS ET MALADIES</h3>
-            <p>[Comment diagnostiquer et soigner les maladies contractées dans les tranchées ou sur le front].</p>
-        </div>
+            <!-- EQUIPEMENTS -->
+            <div id="page-eq-secours" class="fiche-texte">
+                <h2>🩹 MATÉRIEL DE PREMIER SECOURS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-eq-op" class="fiche-texte">
+                <h2>💉 MATÉRIEL D'OPÉRATION</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-tenues-hdr" class="fiche-texte">
+                <h2>⛑️ TENUES : HOMME DU RANG</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-tenues-so" class="fiche-texte">
+                <h2>⛑️ TENUES : SOUS-OFFICIER</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-tenues-off" class="fiche-texte">
+                <h2>⛑️ TENUES : OFFICIER</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
 
-        <!-- 🛠️ EQUIPEMENTS -->
-        <div id="equipements" class="categorie-content">
-            <h2>🛠️ SECTION IV - LOGISTIQUE, LOGEMENTS ET ARSENAL</h2>
-            
-            <h3>🩹 MATÉRIEL DE PREMIERS SECOURS</h3>
-            <p>[Composition exacte du paquetage du Medic de terrain].</p>
-            
-            <h3>💉 INVENTAIRE DE BLOC OPÉRATOIRE</h3>
-            <p>[Inventaire requis pour qu'une tente médicale soit considérée comme opérationnelle].</p>
-            
-            <h3>⛑️ DOTATION DES TENUES REGLEMENTAIRES</h3>
-            <ul>
-                <li><strong>Homme du rang :</strong> [Description ou lien de la tenue réglementaire]</li>
-                <li><strong>Sous-officier :</strong> [Description ou insignes à porter]</li>
-                <li><strong>Officier :</strong> [Uniforme de cérémonie / commandement]</li>
-            </ul>
-        </div>
+            <!-- COMMUNICATIONS -->
+            <div id="page-recensement" class="fiche-texte">
+                <h2>📻 RECENSEMENT DE BLESSÉS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
 
-        <!-- 📋 AUTRES DIRECTIVES (COMMUNICATION, VACCINS) -->
-        <div id="autres" class="categorie-content">
-            <h2>📋 SECTION V - PROTOCOLES ANNEXES ET ADMINISTRATIFS</h2>
-            
-            <h3>📻 COMMUNICATIONS & RECENSEMENT DES BLESSÉS</h3>
-            <p>[Procédure radio obligatoire pour annoncer les pertes ou demander une évacuation médicale (Medevac)].</p>
-            
-            <h3>💉 CAMPAGNE DE VACCINATION</h3>
-            <p><strong>Vaccin du Tétanos :</strong> [Règles sur l'administration obligatoire du vaccin aux troupes].</p>
-            <p><strong>Manuel des Vaccinations (Cours) :</strong> [Guide pédagogique théorique sur l'immunisation].</p>
-            <p><strong>Anciennes Campagnes :</strong> [Archives des vagues de vaccination passées].</p>
-        </div>
+            <!-- VACCINATIONS -->
+            <div id="page-tetanos" class="fiche-texte">
+                <h2>💉 VACCIN DU TÉTANOS</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-ancienne-campagne" class="fiche-texte">
+                <h2>🔹 ANCIENNE CAMPAGNE</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-manuel-vaccin" class="fiche-texte">
+                <h2>🔹 MANUEL DES VACCINATIONS (COURS)</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
 
-        <div class="pied-page">
-            RESTRICTED — WAR DEPARTMENT — BASE TEMPLATE — PROPERTY OF 188th MEDICAL BATTALION
+            <!-- CATEGORIES INDEPENDANTES -->
+            <div id="page-fonction" class="fiche-texte">
+                <h2>⚙️ FONCTION</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-installations" class="fiche-texte">
+                <h2>🏥 INSTALLATIONS MÉDICALES</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-geneve" class="fiche-texte">
+                <h2>🛡️ CONVENTION DE GENÈVE</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+            <div id="page-formation" class="fiche-texte">
+                <h2>📚 FORMATION</h2>
+                <p>[Texte à remplir...]</p>
+            </div>
+
+            <div class="pied-page">PROPERTY OF US ARMY — LBRP</div>
         </div>
 
     </div>
 
-    <!-- CODE SCRIPT POUR RENDRE LE MENU CLIQUABLE -->
+    <!-- SCRIPT LOGIQUE POUR LES MENUS DÉROULANTS ET LE CHANGEMENT DE PAGE -->
     <script>
-        function ouvrirCategorie(idCategorie) {
-            let contenus = document.querySelectorAll('.categorie-content');
-            contenus.forEach(c => c.style.display = 'none');
+        // Permet d'ouvrir/fermer les sous-menus à gauche
+        function toggleMenu(idMenu) {
+            let menu = document.getElementById(idMenu);
+            let displays = window.getComputedStyle(menu).display;
+            
+            // Fermer tous les sous-menus ouverts pour faire propre
+            document.querySelectorAll('.sous-menu').forEach(m => {
+                if(m.id !== idMenu) m.style.display = 'none';
+            });
 
-            let boutons = document.querySelectorAll('nav button');
-            boutons.forEach(b => b.classList.remove('active'));
+            if (displays === 'block') {
+                menu.style.display = 'none';
+            } else {
+                menu.style.display = 'block';
+            }
+        }
 
-            document.getElementById(idCategorie).style.display = 'block';
-            event.currentTarget.classList.add('active');
+        // Permet d'afficher la bonne fiche de texte à droite
+        function changerPage(idPage) {
+            document.querySelectorAll('.fiche-texte').forEach(p => p.classList.remove('active-content'));
+            document.querySelectorAll('.sous-cat').forEach(b => b.classList.remove('active-page'));
+            
+            document.getElementById(idPage).classList.add('active-content');
+            event.currentTarget.classList.add('active-page');
+        }
+
+        // Pour les boutons qui n'ont pas de sous-catégories (comme Accueil, Fonction, etc.)
+        function ouvrirDirect(idPage) {
+            document.querySelectorAll('.sous-menu').forEach(m => m.style.display = 'none');
+            document.querySelectorAll('.fiche-texte').forEach(p => p.classList.remove('active-content'));
+            document.getElementById(idPage).classList.add('active-content');
         }
     </script>
 
